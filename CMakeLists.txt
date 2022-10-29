@@ -8,15 +8,17 @@ set(SFML_INCLUDE_DIR C:/SFML-2.5.1/include)
 set(SFML_LIBRARY_DIR C:/SFML-2.5.1/lib)
 set(SFML_DIR C:/SFML-2.5.1/lib/cmake/SFML)
 
+file(GLOB PROJECT_FILES ${PROJECT_SOURCE_DIR}/*.cpp)
+
 link_directories(SFML_LIBRARY_DIR)
-include_directories(SFML_INCLUDE_DIR)
+include_directories(SFML_INCLUDE_DIR, ${PROJECT_SOURCE_DIR})
 
 find_package(SFML 2.5.1 COMPONENTS system window network graphics audio REQUIRED)
 
 include(CTest)
 enable_testing()
 
-add_executable(Evergreen main.cpp)
+add_executable(Evergreen ${PROJECT_FILES})
 
 target_link_libraries (Evergreen sfml-graphics sfml-window sfml-system)
 
