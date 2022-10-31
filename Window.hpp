@@ -2,27 +2,39 @@
 #define CPP_WINDOW_HPP
 
 #include <memory>
+#include <cstring>
 #include <SFML/Graphics.hpp>
-
 
 class Window
 {
     public:
-    Window(const sf::VideoMode& size = {1000, 600}, 
-            const std::string& title = "Evergreen");
-
-    virtual ~Window() = default;
+    Window();
+    Window(const sf::VideoMode& size);
+    ~Window();
 
     void HandleEvents();
 
-    void Render();
+    void BeginDraw();
+    void Draw(sf::Drawable& l_drawable);
+    void EndDraw();
+
     void Update();
 
-    void OnCreate();
+    bool IsOpen();
+
+    sf::VideoMode GetWindowSize() const;
 
     private:
-    std::unique_ptr<sf::RenderWindow> window;
-    sf::Event event;
+    void Initialize(const sf::VideoMode& w_size, 
+            const std::string& w_title = "Evergreen");
+    void Destroy();
+
+    private:
+    std::unique_ptr<sf::RenderWindow> m_window;
+    sf::VideoMode m_window_size;
+    std::string m_window_title;
+
+    sf::Event m_event;
 };
 
 #endif

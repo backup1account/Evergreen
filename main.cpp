@@ -1,10 +1,10 @@
-#include "Window.hpp"
+#include "Game.hpp"
 
 
 int main()
 {
-    Window w;
-    w.OnCreate();
-
+    Game g;
+    g.Run();
+    
     return 0;
 }

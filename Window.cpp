@@ -1,27 +1,53 @@
 #include "Window.hpp"
 
 
-Window::Window(const sf::VideoMode& size, const std::string& title)
+Window::Window()
 {
-    window = std::make_unique<sf::RenderWindow>(size, title);
+    this->Initialize(sf::VideoMode(1000, 600), "Evergreen");
+}
+
+Window::Window(const sf::VideoMode& size)
+{
+    this->Initialize(size, m_window_title);
+}
+
+Window::~Window()
+{
+    this->Destroy();
+}
+
+
+void Window::Initialize(const sf::VideoMode& w_size, const std::string& w_title)
+{
+    m_window = std::make_unique<sf::RenderWindow>(w_size, w_title);
+    this->m_window->setFramerateLimit(100);
+
+    m_window_size = w_size;
+    m_window_title = w_title;
+}
+
+void Window::Destroy()
+{
+    this->m_window->close();
 }
 
 
 void Window::HandleEvents()
 {
-    while (this->window->pollEvent(this->event))
+    while (this->m_window->pollEvent(this->m_event))
     {
-        if (this->event.type == sf::Event::Closed) 
+
+        if (this->m_event.type == sf::Event::Closed) 
         { 
-            this->window->close(); 
+            this->Destroy(); 
         }
 
-        if (this->event.type == sf::Event::KeyPressed)
+        if (this->m_event.type == sf::Event::KeyPressed)
         {
-            switch(this->event.key.code)
+            switch(this->m_event.key.code)
             {
                 case (sf::Keyboard::Escape):
-                    this->window->close();
+                    this->Destroy();
                     break;
             }
         }
@@ -29,10 +55,19 @@ void Window::HandleEvents()
 }
 
 
-void Window::Render()
+void Window::BeginDraw()
 {
-    this->window->clear();
-    this->window->display();
+    this->m_window->clear();
+}
+
+void Window::Draw(sf::Drawable& l_drawable)
+{
+    this->m_window->draw(l_drawable);
+}
+
+void Window::EndDraw()
+{
+    this->m_window->display();
 }
 
 
@@ -42,11 +77,12 @@ void Window::Update()
 }
 
 
-void Window::OnCreate()
+bool Window::IsOpen()
 {
-    while (this->window->isOpen())
-    {
-        this->Update();
-        this->Render();
-    }
+    return true ? m_window->isOpen() : false;
+}
+
+sf::VideoMode Window::GetWindowSize() const
+{
+    return m_window_size;
 }
