@@ -1,7 +1,10 @@
 #ifndef CPP_GAME_HPP
 #define CPP_GAME_HPP
 
+#include <iostream>
+
 #include "Window.hpp"
+#include "SpriteComponent.hpp"
 
 class Game
 {
@@ -10,19 +13,20 @@ class Game
     ~Game();
 
     void Render();
-
     void Update();
-    // void UpdateTime();
     void Run();
 
-    // Window* GetWindow();
+    Window* GetWindow();
+
+    sf::Time GetElapsedTime();
+    void RestartTime();
 
     private:
     Window m_window;
     sf::Event m_event;
 
-    sf::Clock TimeClock;
-    sf::Time DeltaTime;
+    sf::Clock m_clock;
+    sf::Time m_elapsed_time;
 };
 
 #endif

@@ -8,7 +8,7 @@ Window::Window()
 
 Window::Window(const sf::VideoMode& size)
 {
-    this->Initialize(size, m_window_title);
+    this->Initialize(size);
 }
 
 Window::~Window()
@@ -16,11 +16,10 @@ Window::~Window()
     this->Destroy();
 }
 
-
 void Window::Initialize(const sf::VideoMode& w_size, const std::string& w_title)
 {
-    m_window = std::make_unique<sf::RenderWindow>(w_size, w_title);
-    this->m_window->setFramerateLimit(100);
+    this->m_window.create(w_size, w_title);
+    this->m_window.setFramerateLimit(60);
 
     m_window_size = w_size;
     m_window_title = w_title;
@@ -28,13 +27,17 @@ void Window::Initialize(const sf::VideoMode& w_size, const std::string& w_title)
 
 void Window::Destroy()
 {
-    this->m_window->close();
+    this->m_window.close();
 }
 
+sf::RenderWindow* Window::GetRenderWindow()
+{
+    return &m_window;
+}
 
 void Window::HandleEvents()
 {
-    while (this->m_window->pollEvent(this->m_event))
+    while (this->m_window.pollEvent(this->m_event))
     {
 
         if (this->m_event.type == sf::Event::Closed) 
@@ -54,20 +57,19 @@ void Window::HandleEvents()
     }
 }
 
-
 void Window::BeginDraw()
 {
-    this->m_window->clear();
+    this->m_window.clear();
 }
 
 void Window::Draw(sf::Drawable& l_drawable)
 {
-    this->m_window->draw(l_drawable);
+    this->m_window.draw(l_drawable);
 }
 
 void Window::EndDraw()
 {
-    this->m_window->display();
+    this->m_window.display();
 }
 
 
@@ -79,7 +81,7 @@ void Window::Update()
 
 bool Window::IsOpen()
 {
-    return true ? m_window->isOpen() : false;
+    return true ? this->m_window.isOpen() : false;
 }
 
 sf::VideoMode Window::GetWindowSize() const

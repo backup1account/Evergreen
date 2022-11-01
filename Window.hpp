@@ -2,7 +2,6 @@
 #define CPP_WINDOW_HPP
 
 #include <memory>
-#include <cstring>
 #include <SFML/Graphics.hpp>
 
 class Window
@@ -22,6 +21,7 @@ class Window
 
     bool IsOpen();
 
+    sf::RenderWindow* GetRenderWindow(); // ?
     sf::VideoMode GetWindowSize() const;
 
     private:
@@ -30,7 +30,7 @@ class Window
     void Destroy();
 
     private:
-    std::unique_ptr<sf::RenderWindow> m_window;
+    sf::RenderWindow m_window;
     sf::VideoMode m_window_size;
     std::string m_window_title;
 
