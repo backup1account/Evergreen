@@ -35,28 +35,6 @@ sf::RenderWindow* Window::GetRenderWindow()
     return &m_window;
 }
 
-void Window::HandleEvents()
-{
-    while (this->m_window.pollEvent(this->m_event))
-    {
-
-        if (this->m_event.type == sf::Event::Closed) 
-        { 
-            this->Destroy(); 
-        }
-
-        if (this->m_event.type == sf::Event::KeyPressed)
-        {
-            switch(this->m_event.key.code)
-            {
-                case (sf::Keyboard::Escape):
-                    this->Destroy();
-                    break;
-            }
-        }
-    }
-}
-
 void Window::BeginDraw()
 {
     this->m_window.clear();
@@ -70,12 +48,6 @@ void Window::Draw(sf::Drawable& l_drawable)
 void Window::EndDraw()
 {
     this->m_window.display();
-}
-
-
-void Window::Update()
-{
-    this->HandleEvents();
 }
 
 

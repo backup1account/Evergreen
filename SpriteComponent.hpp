@@ -3,7 +3,6 @@
 
 #include <iostream>
 #include <SFML/Graphics.hpp>
-
 #include "Interfaces/Component.hpp"
 
 class SpriteComponent : public I_Component
@@ -16,9 +15,7 @@ class SpriteComponent : public I_Component
     void Create(const std::string& filename);
     void Render(sf::RenderWindow& window);
 
-    void Tick();
-
-    // sf::Sprite* GetSprite();
+    sf::Sprite* GetSprite();
 
     private:
     void Initialize(const std::string& filename);

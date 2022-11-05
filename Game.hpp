@@ -5,6 +5,7 @@
 
 #include "Window.hpp"
 #include "SpriteComponent.hpp"
+#include "GameEntity.hpp"
 
 class Game
 {
@@ -13,7 +14,7 @@ class Game
     ~Game();
 
     void Render();
-    void Update();
+    void UpdateEvent();
     void Run();
 
     Window* GetWindow();
@@ -27,6 +28,8 @@ class Game
 
     sf::Clock m_clock;
     sf::Time m_elapsed_time;
+
+    GameEntity m_test_component;
 };
 
 #endif

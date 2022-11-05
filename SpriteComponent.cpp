@@ -18,7 +18,6 @@ void SpriteComponent::Initialize(const std::string& filename)
     }
 
     m_sprite.setTexture(m_texture);
-    m_sprite.setPosition(200, 200);  // delete later
     m_sprite.scale(sf::Vector2f(0.25, 0.25)); // delete later
 }
 
@@ -32,7 +31,7 @@ void SpriteComponent::Render(sf::RenderWindow& window)
     window.draw(m_sprite);
 }
 
-// sf::Sprite* SpriteComponent::GetSprite()
-// {
-//     return &m_sprite;
-// }
+sf::Sprite* SpriteComponent::GetSprite()
+{
+    return &m_sprite;
+}

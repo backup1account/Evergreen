@@ -1,27 +1,25 @@
 #ifndef CPP_WINDOW_HPP
 #define CPP_WINDOW_HPP
 
-#include <memory>
 #include <SFML/Graphics.hpp>
+#include <memory>
 
 class Window
 {
     public:
+    friend class Game;
+
     Window();
     Window(const sf::VideoMode& size);
     ~Window();
-
-    void HandleEvents();
 
     void BeginDraw();
     void Draw(sf::Drawable& l_drawable);
     void EndDraw();
 
-    void Update();
-
     bool IsOpen();
 
-    sf::RenderWindow* GetRenderWindow(); // ?
+    sf::RenderWindow* GetRenderWindow();
     sf::VideoMode GetWindowSize() const;
 
     private:

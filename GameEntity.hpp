@@ -1,31 +1,33 @@
 #ifndef CPP_GAMEENTITY_HPP
 #define CPP_GAMEENTITY_HPP
 
-#include <vector>
+#include <unordered_map>
 #include <string>
+#include <memory>
 #include <SFML/Graphics.hpp>
 
+#include "MovementComponent.hpp"
 #include "SpriteComponent.hpp"
-#include "Interfaces/Component.hpp"
 
 class GameEntity
 {
     public:
+    GameEntity() = default;
     GameEntity(const std::string& ID);
     ~GameEntity();
 
     void AddSpriteComponent(const std::string& filename);
+    void AddMovementComponent(const float& max_velocity);
 
-    void SetPosition(sf::Vector2f& position);
-    void Render(); // render all components
+    void MoveEntity(sf::Vector2f direction, sf::Time& elapsed_t);
+
+    void Render(sf::RenderWindow& window); // render all components
 
     private:
     std::string m_ID;
-    std::vector<I_Component> m_components;
 
-    sf::Vector2f m_position;
-
-    SpriteComponent m_single_component;
+    std::unordered_map<std::string, std::shared_ptr<SpriteComponent>> m_components;
+    std::shared_ptr<MovementComponent> m_movement_component;
 };
 
 #endif
