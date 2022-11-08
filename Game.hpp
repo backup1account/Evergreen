@@ -2,10 +2,11 @@
 #define CPP_GAME_HPP
 
 #include <iostream>
+#include <memory>
+#include <string>
 
 #include "Window.hpp"
-#include "SpriteComponent.hpp"
-#include "GameEntity.hpp"
+#include "Player.hpp"
 
 class Game
 {
@@ -29,7 +30,7 @@ class Game
     sf::Clock m_clock;
     sf::Time m_elapsed_time;
 
-    GameEntity m_test_component;
+    std::shared_ptr<Player> m_player;
 };
 
 #endif

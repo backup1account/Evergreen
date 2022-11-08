@@ -25,6 +25,13 @@ void GameEntity::AddMovementComponent(const float& max_velocity)
     this->m_movement_component = std::make_shared<MovementComponent>(max_velocity);
 }
 
+// LATER: PlayerSpawn ?
+void GameEntity::SetEntityPosition(const sf::Vector2f& new_position)
+{
+    this->m_components[m_ID]->GetSprite()->setPosition(new_position);
+    this->m_movement_component->SetPosition(new_position);
+}
+
 
 void GameEntity::MoveEntity(sf::Vector2f direction, sf::Time& elapsed_t)
 {
@@ -36,12 +43,6 @@ void GameEntity::MoveEntity(sf::Vector2f direction, sf::Time& elapsed_t)
         this->m_components[m_ID]->GetSprite()->setPosition(new_position);
     }
 }
-
-
-// void GameEntity::SetPosition(sf::Vector2f& position) 
-// {
-//     m_movement_component->SetPosition(position);
-// }
 
 void GameEntity::Render(sf::RenderWindow& window)
 {

@@ -19,6 +19,8 @@ class GameEntity
     void AddSpriteComponent(const std::string& filename);
     void AddMovementComponent(const float& max_velocity);
 
+    void SetEntityPosition(const sf::Vector2f& new_position);
+
     void MoveEntity(sf::Vector2f direction, sf::Time& elapsed_t);
 
     void Render(sf::RenderWindow& window); // render all components

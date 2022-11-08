@@ -9,7 +9,7 @@ class MovementComponent
     MovementComponent(float max_velocity);
     ~MovementComponent() = default;
 
-    void SetPosition(sf::Vector2f new_position);
+    void SetPosition(const sf::Vector2f& new_position);
 
     const sf::Vector2f& GetPosition() const;
 

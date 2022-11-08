@@ -3,17 +3,14 @@
 
 Game::Game() : m_window(sf::VideoMode(1000, 600))
 {
-    GameEntity test("star");
-    m_test_component = test;
-    m_test_component.AddSpriteComponent("../Assets/star.png");
-    m_test_component.AddMovementComponent(100.f);
-
-    // setPosition() z wykorzystaniem movement component
-    // scale sprite ?
+    // MOVE TO ENTITY MANAGER
+    m_player = std::make_shared<Player>("../Assets/star.png", 100.f);
 }
 
-Game::~Game() {}
+Game::~Game() 
+{
 
+}
 
 sf::Time Game::GetElapsedTime()
 {
@@ -62,19 +59,19 @@ void Game::UpdateEvent()
                     break;
 
                 case (sf::Keyboard::W):
-                    this->m_test_component.MoveEntity(sf::Vector2f(0.f, -1.f), m_elapsed_time);
+                    this->m_player->GetPlayerEntity()->MoveEntity(sf::Vector2f(0.f, -1.f), m_elapsed_time);
                     break;
 
                 case (sf::Keyboard::S):
-                this->m_test_component.MoveEntity(sf::Vector2f(0.f, 1.f), m_elapsed_time);
+                    this->m_player->GetPlayerEntity()->MoveEntity(sf::Vector2f(0.f, 1.f), m_elapsed_time);
                     break;
 
                 case (sf::Keyboard::A):
-                    this->m_test_component.MoveEntity(sf::Vector2f(-1.f, 0.f), m_elapsed_time);
+                    this->m_player->GetPlayerEntity()->MoveEntity(sf::Vector2f(-1.f, 0.f), m_elapsed_time);
                     break;
 
                 case (sf::Keyboard::D):
-                    this->m_test_component.MoveEntity(sf::Vector2f(1.f, 0.f), m_elapsed_time);
+                    this->m_player->GetPlayerEntity()->MoveEntity(sf::Vector2f(1.f, 0.f), m_elapsed_time);
                     break;
             }
         }
@@ -86,10 +83,7 @@ void Game::Render()
 {
     this->GetWindow()->BeginDraw();
 
-    this->m_test_component.Render( *(m_window.GetRenderWindow()) );
-
-    // this->GetWindow()->Draw( *(component.GetSprite()) ); #1
-    // this->component.Render( *(m_window.GetRenderWindow()) ); #2
-
+    this->m_player->GetPlayerEntity()->Render(*(m_window.GetRenderWindow()));
+    
     this->GetWindow()->EndDraw();
 }

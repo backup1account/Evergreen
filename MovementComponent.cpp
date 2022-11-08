@@ -6,7 +6,7 @@ MovementComponent::MovementComponent(float max_velocity)
     
 }
 
-void MovementComponent::SetPosition(sf::Vector2f new_position)
+void MovementComponent::SetPosition(const sf::Vector2f& new_position)
 {
     m_position = new_position;
 }

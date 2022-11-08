@@ -1,18 +1,21 @@
 #include "Bitmask.hpp"
 
 
-Bitmask::Bitmask() : m_bits(0) {}
+Bitmask::Bitmask() : m_bits(0) 
+{
+
+}
 
 void Bitmask::SetMask(Bitmask& other)
 {
     m_bits = other.GetMask();
 }
 
-
 uint32_t Bitmask::GetMask() const
 {
     return m_bits;
 }
+
 
 bool Bitmask::GetBit(int pos) const
 {
