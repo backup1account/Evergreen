@@ -1,7 +1,7 @@
 # Evergreen
 🌿🥀 Pixel-art RPG game made with SFML.
 
-### Progress
+## Progress
 
 - [x]  Basic project configuration
 - [x]  Basic window and game setup
